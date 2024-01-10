@@ -1,0 +1,33 @@
+# mount point     fstype  device                      device2               flags
+# Dynamic Partitions
+/product	ext4		/dev/block/mapper/product	flags=backup=1;wipeingui;display="Product"
+/system_root	ext4		/dev/block/mapper/system	flags=backup=1;wipeingui;display="System"
+/vendor		ext4		/dev/block/mapper/vendor	flags=backup=1;wipeingui;display="Vendor"
+/system_ext	ext4		/dev/block/mapper/system_ext	flags=backup=1;wipeingui;display="System_ext"
+# Linked partitions
+/system_image     emmc    /dev/block/mapper/system                          flags=backup=0;flashimg
+/system_ext_image emmc    /dev/block/mapper/system_ext                      flags=backup=0;flashimg
+/vendor_image     emmc    /dev/block/mapper/vendor                          flags=backup=0;flashimg
+/product_image    emmc    /dev/block/mapper/product                         flags=backup=0;flashimg;display="Product Image"
+
+# Common physical partitions
+/misc                emmc      /dev/block/by-name/misc              flags=display=misc
+/boot                emmc      /dev/block/by-name/boot              flags=backup=1;flashimg;display="Boot Image"
+/recovery            emmc      /dev/block/by-name/recovery          flags=backup=1;flashimg;display="Recovery Image"
+/persist             emmc      /dev/block/by-name/persist           flags=display=persist
+/logo                emmc      /dev/block/by-name/logo              flags=display=logo
+/fbootlogo           emmc      /dev/block/by-name/fbootlogo         flags=display=fbootlogo
+/metadata            ext4      /dev/block/by-name/metadata          flags=display=Metadata;wipeingui
+/data                ext4      /dev/block/by-name/userdata          flags=encryptable=/dev/block/by-name/metadata
+/efs                 ext4      /dev/block/by-name/sec_efs           flags=display=efs
+/sec_efs             ext4      /dev/block/by-name/sec_efs           flags=display=sec_efs
+/cache               ext4      /dev/block/by-name/cache             flags=backup=1;display="Cache"
+/dtbo_image          emmc      /dev/block/by-name/dtbo	            flags=backup=0;flashimg;display="DTBO"
+
+# a03
+/socko               ext4      /dev/block/by-name/socko             flags=display=socko
+/odmko               ext4      /dev/block/by-name/odmko             flags=display=odmko
+
+# Removable storage
+/external_sd      vfat    /dev/block/mmcblk1p1        /dev/block/mmcblk1    flags=storage;wipeingui;removable;display="External SDcard"
+/usb-otg          auto    /dev/block/sda1             /dev/block/sda        flags=display="USB-OTG";storage;wipeingui;removable
